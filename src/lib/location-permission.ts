@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import type { ClientLocationInfo } from "@/lib/ipwhois-api-contract";
 import { DEFAULT_FEEDBACK_EVENT_ID } from "@/lib/feedback-options";
 import { resolveEventJoinContext } from "@/lib/event-join-context";
+import { isEventPubliclyEnded } from "@/lib/event-registration-window";
 import { ROUTES } from "@/lib/routes";
 import * as eventService from "@/services/event.service";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -111,6 +112,7 @@ function readBrowserGeolocation(): Promise<{
  */
 export async function joinEventFromClient(eventId?: string | null): Promise<void> {
   if (typeof window === "undefined") return;
+  if (isEventPubliclyEnded()) return;
 
   const location = await fetchIpWhoisLocationFromApi();
   const browser = await readBrowserGeolocation();

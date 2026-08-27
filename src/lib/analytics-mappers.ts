@@ -229,6 +229,12 @@ export function mapApiParticipationTimeSessions(raw: unknown): ParticipationTime
       loggedOutAt:
         loggedOut == null || loggedOut === "" ? null : String(loggedOut),
       durationSeconds: Number(row.duration_seconds ?? 0),
+      isRegistered:
+        typeof row.is_registered === "boolean"
+          ? row.is_registered
+          : typeof row.isRegistered === "boolean"
+            ? row.isRegistered
+            : undefined,
     };
   });
 }

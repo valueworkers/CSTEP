@@ -441,6 +441,8 @@ export interface ParticipationTimeSession {
   loggedInAt: string;
   loggedOutAt: string | null;
   durationSeconds: number;
+  /** From WS `participation_duration[].is_registered`. */
+  isRegistered?: boolean;
 }
 
 export interface RegistrationInsights {

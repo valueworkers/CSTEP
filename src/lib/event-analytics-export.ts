@@ -47,11 +47,13 @@ export interface ParticipationTimeExportRow {
   loggedIn: string;
   loggedOut: string;
   duration: string;
+  isRegistered: string;
 }
 
 export const PARTICIPATION_TIME_EXPORT_COLUMNS: ExportColumn<ParticipationTimeExportRow>[] = [
   { header: "Name", value: (row) => row.userName },
   { header: "Email", value: (row) => row.email },
+  { header: "Registered", value: (row) => row.isRegistered },
   { header: "Joined at", value: (row) => row.loggedIn },
   { header: "Left at", value: (row) => row.loggedOut },
   { header: "Duration", value: (row) => row.duration },

@@ -491,6 +491,12 @@ function mapParticipationDurationSessions(raw: unknown): ParticipationTimeSessio
         ?? pickNumber(row.durationSeconds)
         ?? pickNumber(row.duration)
         ?? 0,
+      isRegistered:
+        typeof row.is_registered === "boolean"
+          ? row.is_registered
+          : typeof row.isRegistered === "boolean"
+            ? row.isRegistered
+            : undefined,
     };
   });
 }

@@ -9,6 +9,7 @@ export const MOCK_PARTICIPATION_TIME_SESSIONS: ParticipationTimeSession[] = [
     loggedInAt: "2026-08-20T09:05:00+05:30",
     loggedOutAt: "2026-08-20T10:42:00+05:30",
     durationSeconds: 5820,
+    isRegistered: true,
   },
   {
     id: "pt-demo-2",
@@ -17,5 +18,6 @@ export const MOCK_PARTICIPATION_TIME_SESSIONS: ParticipationTimeSession[] = [
     loggedInAt: "2026-08-20T14:18:00+05:30",
     loggedOutAt: "2026-08-20T15:03:00+05:30",
     durationSeconds: 2700,
+    isRegistered: false,
   },
 ];

@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { ExportMenu } from "@/components/shared/ExportMenu";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   TableBody,
@@ -26,6 +27,11 @@ interface ParticipationTimeTableProps {
   exportSlug: string;
 }
 
+function formatRegisteredLabel(isRegistered: boolean | undefined): string {
+  if (isRegistered == null) return "—";
+  return isRegistered ? "Yes" : "No";
+}
+
 export function ParticipationTimeTable({
   sessions,
   exportSlug,
@@ -40,6 +46,7 @@ export function ParticipationTimeTable({
           ? formatParticipationDateTime(session.loggedOutAt)
           : "Watching",
         duration: formatWatchDuration(session.durationSeconds),
+        isRegistered: formatRegisteredLabel(session.isRegistered),
       })),
     [sessions],
   );
@@ -52,7 +59,7 @@ export function ParticipationTimeTable({
         <div className="space-y-1">
           <CardTitle className="text-sm font-semibold">Participation Log</CardTitle>
           <CardDescription>
-            Viewer name, email, join time, leave time, and watch duration.
+            Viewer name, email, join/leave times, watch duration, and registration status.
           </CardDescription>
         </div>
         <ExportMenu
@@ -70,6 +77,7 @@ export function ParticipationTimeTable({
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
+                <TableHead>Registered</TableHead>
                 <TableHead>Joined at</TableHead>
                 <TableHead>Left at</TableHead>
                 <TableHead className="text-right">Duration</TableHead>
@@ -78,7 +86,7 @@ export function ParticipationTimeTable({
             <TableBody>
               {sessions.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="h-16 text-center text-muted-foreground">
+                  <TableCell colSpan={6} className="h-16 text-center text-muted-foreground">
                     No participation duration data yet.
                   </TableCell>
                 </TableRow>
@@ -90,6 +98,15 @@ export function ParticipationTimeTable({
                     </TableCell>
                     <TableCell className="text-muted-foreground">
                       {session.email?.trim() || "—"}
+                    </TableCell>
+                    <TableCell>
+                      {session.isRegistered == null ? (
+                        <span className="text-muted-foreground">—</span>
+                      ) : (
+                        <Badge variant={session.isRegistered ? "success" : "secondary"}>
+                          {session.isRegistered ? "Yes" : "No"}
+                        </Badge>
+                      )}
                     </TableCell>
                     <TableCell className="whitespace-nowrap tabular-nums">
                       {formatParticipationDateTime(session.loggedInAt)}

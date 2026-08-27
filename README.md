@@ -648,6 +648,7 @@ Typical deployment target: **Vercel** (frontend) + **Django** (API).
 
 ### 2026-08-27
 
+- **Participation Log:** Live analytics `participation_duration` rows now map `is_registered` and show a **Registered** Yes/No column (table + Excel/PDF export).
 - **Watch Live access:** Base users must be **registered for the event** to use Watch Live on the home page and `/streaming`. Sign-in alone no longer grants stream access; unregistered users see a register prompt (or a disabled button after registration closes). Staff unchanged.
 - **Event join API:** `POST /events/event/:id/join/` is no longer called after the public event window ends (`isEventPubliclyEnded()` — login, home mount, and Watch Live).
 
